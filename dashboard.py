@@ -10,8 +10,8 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import requests
 import plotly.graph_objects as go
-from PIL import Image
-image = Image.open('shapFI1.png')
+#from PIL import Image
+#image = Image.open('shapFI1.png')
 import time
 import streamlit.components.v1 as components
 
