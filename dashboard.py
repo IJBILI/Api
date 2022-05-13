@@ -29,7 +29,7 @@ from PIL import Image
 global data
 data = pd.read_csv("data_test.csv")
 #st.write(str(data.shape[0]))
-train_set = pd.read_csv("application_train.csv", nrows = 300)
+train_set = pd.read_csv("train_set.csv", nrows = 300)
 explainer_dict = pickle.load(open('dict_explainer1.p', 'rb'))
 st.write(explainer_dict)
 
