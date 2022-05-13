@@ -15,3 +15,4 @@ requests==2.25.1
 Pillow==9.1.0
 smmap==5.0.0
 Streamlit
+lime==0.2.0.1 

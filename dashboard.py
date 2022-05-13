@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pickle
 import numpy as np
 import pandas as pd
@@ -13,23 +14,34 @@ import plotly.graph_objects as go
 #from PIL import Image
 #image = Image.open('shapFI1.png')
 import time
+import lime
 import streamlit.components.v1 as components
 
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_curve, auc
 import os
 
+from PIL import Image
+
+
 #from modules_api.prediction_api import *
 #from modules_api.data_api import *
 global data
 data = pd.read_csv("data_test.csv")
+#st.write(str(data.shape[0]))
 train_set = pd.read_csv("application_train.csv", nrows = 300)
+explainer_dict = pickle.load(open('dict_explainer1.p', 'rb'))
+st.write(explainer_dict)
+
 def main():
     # local API (à remplacer par l'adresse de l'application déployée)
     API_URL = "http://imenjr.pythonanywhere.com/predictByClientId"
     
 #sample_size = 10000
-
+image = Image.open('shapFI1.png')
+### Shap pic
+def show_pic ():
+    st.image(image, caption='Shap')
 
 ### Data
 def show_data ():
@@ -263,6 +275,18 @@ def show_client_predection():
         ages_decinnie['Ages par Decennie'] = ages_decinnie['Ages par Decennie'].astype(str)
         idx_decinnie = ages_decinnie[ages_decinnie['Ages par Decennie'] == client['DAYS_BIRTH'].values[0]].index
 
+
+#def lime():       
+    #if st.button("Explain Results"):
+        exp = explainer_dict.get("explainer")
+        # Display explainer HTML object
+        st.write(exp)
+        components.html(exp.as_html(), height=800)
+
+        #exp = explainer_dict.get(client_id)
+        #html=exp.as_html()
+        #components.html(html, height=500)
+
         #st.write(ages_decinnie.head())
 
         #colors = ['lightslategray',] * len(ages_decinnie['Nombre de clients par Decennie'])
@@ -394,8 +418,8 @@ if sidebar_selection == 'Model & Prediction':
 if sidebar_selection == 'Prédire solvabilité client':
     selected_item="predire_client"
 
-#if sidebar_selection == 'interpretabilité globale':
-    #selected_item= st.image(image, caption='Sunrise by the mountains')
+if sidebar_selection == 'interpretabilité globale':
+    selected_item= "Shap pic"
 
 seuil_risque = st.sidebar.slider("Seuil de Solvabilité", min_value=0.0, max_value=1.0, value=0.5, step=0.01)
 
@@ -433,3 +457,6 @@ if selected_item == 'Prediction':
 
 if selected_item == 'predire_client':
     show_client_prediction()
+
+if selected_item == 'Shap pic':
+   show_pic ()
