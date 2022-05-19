@@ -39,10 +39,11 @@ def main():
     
 #sample_size = 10000
 image = Image.open('shapFI1.png')
+image1 = Image.open('shapFI2.png')
 ### Shap pic
 def show_pic ():
     st.image(image, caption='Shap')
-
+    st.image(image1, caption='Shap')
 ### Data
 def show_data ():
     st.write(data.head(10))
@@ -283,6 +284,8 @@ def show_client_predection():
         #st.write(exp)
         components.html(exp.as_html(), height=800)
 
+        st.image(image, caption='Shap')
+        st.image(image1, caption='Shap') 
         #exp = explainer_dict.get(client_id)
         #html=exp.as_html()
         #components.html(html, height=500)
