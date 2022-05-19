@@ -31,7 +31,7 @@ data = pd.read_csv("data_test.csv")
 #st.write(str(data.shape[0]))
 train_set = pd.read_csv("train_set.csv", nrows = 300)
 explainer_dict = pickle.load(open('dict_explainer1.p', 'rb'))
-st.write(explainer_dict)
+#st.write(explainer_dict)
 
 def main():
     # local API (à remplacer par l'adresse de l'application déployée)
@@ -280,7 +280,7 @@ def show_client_predection():
     #if st.button("Explain Results"):
         exp = explainer_dict.get("explainer")
         # Display explainer HTML object
-        st.write(exp)
+        #st.write(exp)
         components.html(exp.as_html(), height=800)
 
         #exp = explainer_dict.get(client_id)
@@ -396,7 +396,7 @@ st.title('Home Credit Default Risk')
 st.sidebar.title("Menus")
 sidebar_selection = st.sidebar.radio(
     'Select Menu:',
-    ['Overview', 'Data Analysis', 'Model & Prediction','Prédire solvabilité client', 'Interprétabilité locale'],
+    ['Overview', 'Data Analysis', 'Model & Prediction','Prédire solvabilité client'],
 )
 
 if sidebar_selection == 'Overview':
@@ -418,8 +418,8 @@ if sidebar_selection == 'Model & Prediction':
 if sidebar_selection == 'Prédire solvabilité client':
     selected_item="predire_client"
 
-if sidebar_selection == 'interpretabilité globale':
-    selected_item= "Shap pic"
+#if sidebar_selection == 'interpretabilité globale':
+    #selected_item= "Shap pic"
 
 seuil_risque = st.sidebar.slider("Seuil de Solvabilité", min_value=0.0, max_value=1.0, value=0.5, step=0.01)
 
@@ -458,5 +458,5 @@ if selected_item == 'Prediction':
 if selected_item == 'predire_client':
     show_client_prediction()
 
-if selected_item == 'Shap pic':
-   show_pic ()
+#if selected_item == 'Shap pic':
+#   show_pic ()
