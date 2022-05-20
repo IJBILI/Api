@@ -230,6 +230,8 @@ def display_client_info(id,revenu,age,nb_ann_travail):
     height=300
     
     )
+### Title
+st.title('Home Credit Default Risk')
 API_URL = "http://imenjr.pythonanywhere.com/predictByClientId"
 client_id = st.number_input("Donnez Id du Client",100002)
 #client_id = st.number_input('100002')
@@ -393,7 +395,7 @@ def show_client_prediction():
 
 
 ### Title
-st.title('Home Credit Default Risk')
+#st.title('Home Credit Default Risk')
 
 ### Sidebar
 st.sidebar.title("Menus")
