@@ -27,7 +27,7 @@ from PIL import Image
 #from modules_api.prediction_api import *
 #from modules_api.data_api import *
 global data
-data = pd.read_csv("data_test.csv")
+data = pd.read_csv("data_test2.csv")
 #st.write(str(data.shape[0]))
 train_set = pd.read_csv("train_set.csv", nrows = 300)
 explainer_dict = pickle.load(open('dict_explainer1.p', 'rb'))
@@ -51,12 +51,14 @@ def show_data ():
 ### Solvency
 def pie_chart(thres):
     #st.write(100* (data['TARGET']>thres).sum()/data.shape[0])
-    percent_sup_seuil =100* (data['TARGET']>thres).sum()/data.shape[0]
+    percent_sup_seuil =100* (train_set['TARGET']>thres).sum()/train_set.shape[0]
     percent_inf_seuil = 100-percent_sup_seuil
     d = {'col1': [percent_sup_seuil,percent_inf_seuil], 'col2': ['% Non Solvable','% Solvable',]}
     df = pd.DataFrame(data=d)
     fig = px.pie(df,values='col1', names='col2', title=' Pourcentage de solvabilité des clients di dataset')
     st.plotly_chart(fig)
+
+
 
 def show_overview():
     st.title("Risque")
